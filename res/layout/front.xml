@@ -1,60 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/back_else" >
+    android:orientation="vertical"
+    android:background="@drawable/back_else"
+    android:weightSum="4"
+    >
 
-    <!--
-     <RelativeLayout
-        android:id="@+id/sometext"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_alignLeft="@id/first"
-        android:layout_alignRight="@id/first"
-        android:layout_alignParentTop="true"
-     
-        android:background="@drawable/sometext">
-	 </RelativeLayout>
-    -->
 
     <TextView
         android:id="@+id/text1"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_alignLeft="@+id/first"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/first"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/back2"
-        android:height="80dp"
-        android:paddingLeft="50dp"
-        android:paddingTop="30dp"
-        android:singleLine="true"
+        android:layout_weight="1"
         android:text="欢迎使用班车系统"
         android:textColor="#33FFFF"
         android:textSize="10pt"
         android:textStyle="bold"
-        android:typeface="sans" >
+        android:typeface="sans"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back2"
+        >
     </TextView>
 
     <!-- android:layout_centerVertical="true"  <requestFocus />   android:ems="10" -->
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/first"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp" >
+        android:orientation="horizontal"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:weightSum="3">
 
         <ImageButton
             android:id="@+id/shishi"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:background="#0000"
             android:scaleType="fitXY"
             android:src="@drawable/shishi" />
@@ -63,66 +56,70 @@
 
         <ImageButton
             android:id="@+id/luxian"
-            android:layout_width="200dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:layout_alignBottom="@id/shishi"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@id/shishi"
+
             android:background="#0000"
             android:scaleType="fitXY"
             android:src="@drawable/luxian" />
-    </RelativeLayout>
+    </LinearLayout>
 
     <!-- android:layout_above="@id/third" -->
 
     <ImageButton
         android:id="@+id/fenxiang"
-        android:layout_width="320dp"
-        android:layout_height="100dp"
-        android:layout_alignLeft="@id/first"
-        android:layout_alignRight="@id/first"
-        android:layout_below="@id/first"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+
         android:layout_marginTop="10dp"
         android:background="#0000"
         android:contentDescription="分享"
         android:scaleType="fitXY"
         android:src="@drawable/fenxiang" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/third"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/first"
-        android:layout_alignRight="@id/first"
-        android:layout_below="@id/fenxiang"
-        android:layout_marginTop="10dp
-        " >
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+		android:layout_weight="1"
+        android:weightSum="3"
+        android:layout_marginTop="10dp" >
 
         <ImageButton
             android:id="@+id/zhandian"
-            android:layout_width="200dp"
-            android:layout_height="100dp"
-            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_alignParentLeft="true"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:background="#0000"
             android:scaleType="fitXY"
             android:src="@drawable/zhandian" />
+       <!--  android:layout_alignParentBottom="true" -->
 
         <ImageButton
             android:id="@+id/guanyu"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/zhandian"
-            android:layout_marginBottom="20dp"
-            android:layout_toRightOf="@id/zhandian"
+            android:layout_marginBottom="10dp"
             android:background="#0000"
             android:scaleType="fitXY"
             android:src="@drawable/guanyu" />
-    </RelativeLayout>
 
-</RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
