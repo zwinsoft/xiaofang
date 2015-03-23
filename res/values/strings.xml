@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">班车系统</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="add_button">增加水源</string>
+    <string name="button_down">下</string>
+    <string name="button_up">上</string>
+    <string name="button_left">左</string>
+    <string name="button_right">右</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_input">输入水源信息</string>
+    <string name="SourceNameCaption">水源名称：</string>
+    <string name="SourceTypeCaption">水源类型：</string>
+    <string name="SourceDescriptionCaption">水源情况：</string>
+    <string name="SourcePressureCaption">水压：</string>
+    <string name="PipeRadiusCaption">管径(mm)：</string>
+    <string name="LatitudeCaption">纬度：</string>
+    <string name="LongtitudeCaption">经度：</string>
+    <string name="ContactCaption">联系人：</string>
+    <string name="ContactTelCaption">联系电话：</string>
+    <string name="UpdateDateCaption">更新日期：</string>
+    <string name="SelectPictureCaption">水源照片：</string>
+    <string name="BtnSelectPictureCaption">拍照</string>
+    <string name="btnUpload">保存</string>
+    <string name="btnReturn">返回</string>
+    <string name="CheckBoxWater">显示周边水源</string>
+    <string name="upload">上传</string>
+    <string name="demo_name_offline">离线地图</string>
+    <string name="demo_name_basemap">离线地图演示</string>
+    <string name="btnParameter">参数</string>
+    <string name="title_activity_settings">参数设置</string>
+    <string name="btnSaveSetting">保存参数</string>
+    <string name="TextViewFTPServerIP">FTPServer地址</string>
+    <string name="TextViewFTPServerPort">FTPServer端口(默认：21)</string>
+    <string name="TextViewFTPUserName">FTPServer用户</string>
+    <string name="TextViewFTPPassword">FTPServer密码</string>
+    <string name="btnReturnToMain">返回</string>
+	<string name="btnZoomIn">-</string>
+	<string name="btnZoomOut">+</string>
+	<string name="Username">用户名</string>
+	<string name="Password">密码</string>
+	<string name="offlineSetting">离线地图设置</string>
+	<string name="btnMywater">查看我的水源</string>
+	<string name="setting">设置</string>
+	<string name="share">分享</string>
+	<string name="ontime">实时</string>
+	<string name="route">路线</string>
+	<string name="title_activity_linedails">线路详情</string>
+	
+   
+    
+</resources>

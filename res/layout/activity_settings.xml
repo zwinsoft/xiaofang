@@ -1,0 +1,185 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SettingsActivity" >
+
+    
+            
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Username" />
+            <EditText
+        android:id="@+id/editTextUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>            
+            
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Password" />
+
+            <EditText
+                android:id="@+id/editPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword" />            
+            
+    </LinearLayout>
+    
+  
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewFTPServerIP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TextViewFTPServerIP" />
+            <EditText
+        android:id="@+id/editTextFTPServerIP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="115.28.160.248"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+            
+            
+    </LinearLayout>
+    
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewFTPServerPort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TextViewFTPServerPort" />
+            <EditText
+        android:id="@+id/editTextFTPServerPort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="21"
+        android:ems="10" >
+
+        <requestFocus />
+   		 </EditText>
+            
+            
+        </LinearLayout>
+        
+         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewFTPUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TextViewFTPUserName" />
+            <EditText
+        android:id="@+id/editTextFTPUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ftpuser"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+            
+            
+        </LinearLayout>
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewFTPPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TextViewFTPPassword"
+                 />
+            <EditText
+        android:id="@+id/editTextFTPPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="tjms2014"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+            
+      
+        
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+              <Button
+                  android:id="@+id/btnSaveSetting"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"                  
+            	  android:layout_weight="1"
+                  android:text="@string/btnSaveSetting" />
+               <Button
+                  android:id="@+id/btnReturnToMain"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:text="@string/btnReturnToMain" />
+        	</LinearLayout>
+
+          <Button
+              android:id="@+id/btnOffline"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/offlineSetting" />
+
+    <Button
+        android:id="@+id/btnMywater"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btnMywater" />
+
+	</LinearLayout>
+	</LinearLayout>
+</LinearLayout>
