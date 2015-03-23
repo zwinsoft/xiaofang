@@ -78,26 +78,14 @@ public class RouteActivity extends ListActivity{
 					
 					//跳转到地图页面显示本线路的相关信息；
 					Intent myintent = new Intent(RouteActivity.this,RouteMapActivity.class);
-					//type == route 表示是从XiaofangActivity跳过去的 
-				
-					myapp.setSource("route");
-					Bundle bundle = new Bundle();
-					bundle.putString("source", "route");
-					bundle.putInt("id", id);
+
+					myintent.putExtra("id", id);
 					
-					MyApplication.source_a = "route";
+					String msg = "不耗费流量哦..source:"+id;   
+					Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+					startActivity(myintent);
+						
 					
-					//myintent.putExtra("bundle",bundle);
-					//myintent.putExtra("source", "route");
-					//if (myapp.getSource() != null)&&(
-					myintent.putExtras(bundle);
-					
-					if (MyApplication.source_a == "route"){
-						startActivity(myintent);
-					
-						String msg = "不耗费流量哦..source:"+id;   
-						Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-					}
 				}
 				
 				
@@ -188,7 +176,6 @@ public class RouteActivity extends ListActivity{
 						//跳转到地图页面显示本线路的相关信息；
 						Intent myintent = new Intent(RouteActivity.this,RouteMapActivity.class);
 						//type == route 表示是从XiaofangActivity跳过去的 
-						myintent.putExtra("type", "route");
 						myintent.putExtra("id", id);
 						startActivity(myintent);
 						

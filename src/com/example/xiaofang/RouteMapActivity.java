@@ -1,6 +1,7 @@
 package com.example.xiaofang;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapView;
@@ -23,25 +24,32 @@ public class RouteMapActivity extends FatherMapActivity {
 	    
 		super.mMapView = (MapView) findViewById(R.id.bmapView);
 		/*
-		 * 初始化地图模块
+		 * 初始化地图模块  
+		 * 这个模块一定要在  mMapView 初始化后面
 		 */
 		mapinit();
 		
 		//注册路径规划监听器
 		super.mSearch = RoutePlanSearch.newInstance();
-		mSearch.setOnGetRoutePlanResultListener((OnGetRoutePlanResultListener) this);
-		
-		super.myapp = (MyApplication) getApplicationContext();				
-		
+		mSearch.setOnGetRoutePlanResultListener(this);
 		
 			locationinit();
 			//打开activity 就启动定位，定位好后去申请最近的站点信息；
-			mLocClient.start();
+//			mLocClient.start();
 			
 			//初始化病，设置地图模式改变的监听方法；	
 			initMapModel();
+		int id = this.getIntent().getIntExtra("id",-1);
+		if (id>=0)
+		{
+			super.loadRoute(id);
 			
-		super.loadRoute(2);
+			Log.v("route", "id:"+id);
+			//画折线图
+			
+			applyDriving(id);
+			
+		}
 		
 	}
 	

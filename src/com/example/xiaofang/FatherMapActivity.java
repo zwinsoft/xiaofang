@@ -35,12 +35,15 @@ import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.Polyline;
+import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 import com.baidu.mapapi.map.InfoWindow.OnInfoWindowClickListener;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.overlayutil.WalkingRouteOverlay;
 import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.route.DrivingRoutePlanOption;
 import com.baidu.mapapi.search.route.DrivingRouteResult;
 import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
 import com.baidu.mapapi.search.route.PlanNode;
@@ -62,6 +65,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 
 public class FatherMapActivity extends Activity  implements OnGetRoutePlanResultListener{
+	
 	protected MapView mMapView = null; 
 	//MKOfflineMap mOffline = null;   //离线地图变量
 	
@@ -117,7 +121,9 @@ public class FatherMapActivity extends Activity  implements OnGetRoutePlanResult
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
+		myapp = (MyApplication) getApplicationContext();		
+		
 
 	}//onCreate end....
 	
@@ -504,7 +510,30 @@ public class FatherMapActivity extends Activity  implements OnGetRoutePlanResult
 		
 	}
 	
-	
+	/*
+	 *   根据线路id画通过所有站点的折线图；
+	 *   
+	 *   id：application中缓存的具体线路的id，可以得到这条线路所有站点；
+	 */
+	protected void applyDriving(int id){
+		
+		List<BusLineInfo> oneLineAll = new ArrayList<BusLineInfo>();
+		oneLineAll = myapp.getBusMap(id);
+		//如果没有还两个点那么就，不用规划路径了；
+		if ((oneLineAll == null)||(!(oneLineAll.size() >= 2))) return;
+		
+		List<LatLng> lll = new ArrayList<LatLng>();
+		LatLng latlng;
+		for(BusLineInfo bus:oneLineAll){
+			latlng = new LatLng(bus.getLat(),bus.getLng());
+			lll.add(latlng);
+		}
+				
+		// 添加折线
+		OverlayOptions ooPolyline = new PolylineOptions().width(10)
+				.color(0xAAFF0000).points(lll);
+		mBaiduMap.addOverlay(ooPolyline);
+	}
 	
 	/*
 	 * 根据路径id 在地图上加载路线；
