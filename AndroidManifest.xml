@@ -98,7 +98,7 @@ ubuntu:unD9KhKGqwlHBXzhLrSsiHPP
             android:label="@string/title_activity_linedails" >
         </activity>
           <activity
-            android:name="com.example.xiaofang.NearstStation"
+            android:name="com.example.xiaofang.NearstStationActivity"
             android:label="@string/title_activity_linedails" >
         </activity>
         

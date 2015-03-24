@@ -201,25 +201,25 @@ public class activity_front extends Activity implements BDLocationListener{
 		
 		Intent myintent;
 		if(tofenxiang) {
-			
+			tofenxiang = false;
 			mylocation = loc;
 			//保证被跳转的页面，含有所有的线路信息；
 			loadAllLine();
-			tofenxiang = false;
+			
 			
 		}else if (toNearstStation){
 			//保证缓存中含有最近站点
-			
-//			loadNearstStation();///待实现！！！！！！！！！！！！！！！！！！！！！！！!!!
+			toNearstStation=false;
+			loadNearstStation(loc.getLongitude(),loc.getLatitude());///待实现！！！！！！！！！！！！！！！！！！！！！！！!!!
 			
 			//跳转到最近站点页面
-			myintent = new Intent(activity_front.this, NearstStation.class);
+//			myintent = new Intent(activity_front.this, NearstStationActivity.class);
+//			
+//			myintent.putExtra("lng", loc.getLongitude());
+//			myintent.putExtra("lat", loc.getLatitude());
+//			
+//			startActivity(myintent);
 			
-			myintent.putExtra("lng", loc.getLongitude());
-			myintent.putExtra("lat", loc.getLatitude());
-			
-			startActivity(myintent);
-			toNearstStation=false;
 			
 		}
 		
@@ -246,6 +246,8 @@ public class activity_front extends Activity implements BDLocationListener{
 		
 			myintent.putExtra("lng", mylocation.getLongitude());
 			myintent.putExtra("lat", mylocation.getLatitude());
+			
+	
 			startActivity(myintent);
 			
 			Jumpfenxiang = false;
@@ -313,7 +315,79 @@ public class activity_front extends Activity implements BDLocationListener{
 		});
 	}
 	
+	private void loadNearstStation(double lng,double lat){
+		
+		String  nearestLine ="http://www.zwin.mobi/banche/?m=AndroidApi&c=Index&a=NearestLine";
+		String url = nearestLine + "&lng="+lng+"&lat="+lat;
+		
 	
+		
+		http.send(HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>(){
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {		
+				Log.d("lineDetails", responseInfo.result);
+				
+				//如果返回 “null”  没有内容返回；
+				if (responseInfo.result.equals("resultIsNull")){
+					String msg = "no this line's details";   
+					Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+					return;
+				}
+				
+				 List<BusLineInfo> oneLineAll = new ArrayList<BusLineInfo>();
+//				List<BusLineInfo> allLines = new ArrayList<BusLineInfo>();
+				listType = (Type) new TypeToken<LinkedList<BusLineInfo>>(){}.getType();
+				oneLineAll = gson.fromJson(responseInfo.result,listType);
+				
+				//如果解析后是 “null”  没有内容返回；
+				
+				if (oneLineAll == null){
+					String msg = "no this line's details";   
+					Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+					return;
+				}
+				
+				
+				
+				//输出便于调试
+				for(BusLineInfo line : oneLineAll){
+					Log.d("getNearstStation--Success", line.id+"Stopname:"+line.getStopName()+"--start:"+line.getTime()+"-----msg\n");
+				}
+				
+				
+//				//缓存数据
+//				myapp.addBusMap(id, oneLineAll);
+//				
+//				if (myapp.getBusMap(id) == null){
+//					
+//					Toast.makeText(getApplicationContext(), "没有成功缓存啊   哈哈哈 ", Toast.LENGTH_SHORT).show();
+//					
+//				}else{
+//				
+//					String msg = "已将线路缓存，下次加载将不耗费流量......";   
+//					Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+//				}
+//				
+				//跳转到地图页面显示本线路的相关信息；
+				//Intent myintent = new Intent(activity_front.this,RouteMapActivity.class);
+				//type == route 表示是从XiaofangActivity跳过去的 
+				//myintent.putExtra("id", -1);
+				//startActivity(myintent);
+				
+				
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				Log.v("getLineDetail--error", error.toString()+"%%%%%%"+msg);
+			}			
+		});
+
+		
+		
+		
+	}
 	
 	
 	

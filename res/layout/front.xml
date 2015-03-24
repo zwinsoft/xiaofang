@@ -103,7 +103,7 @@
             android:layout_weight="1"
             android:layout_alignParentLeft="true"
             android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
+           
             android:background="#0000"
             android:scaleType="fitXY"
             android:src="@drawable/zhandian" />
@@ -116,6 +116,7 @@
             android:layout_weight="2"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="10dp"
+             android:layout_marginLeft="10dp"
             android:background="#0000"
             android:scaleType="fitXY"
             android:src="@drawable/guanyu" />
