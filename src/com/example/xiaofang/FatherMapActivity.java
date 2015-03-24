@@ -59,6 +59,7 @@ import com.example.xiaofang.util.LineInfo;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
@@ -518,7 +519,13 @@ public class FatherMapActivity extends Activity  implements OnGetRoutePlanResult
 	protected void applyDriving(int id){
 		
 		List<BusLineInfo> oneLineAll = new ArrayList<BusLineInfo>();
-		oneLineAll = myapp.getBusMap(id);
+		try {
+			oneLineAll = myapp.getBusMap(id);
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
 		//如果没有还两个点那么就，不用规划路径了；
 		if ((oneLineAll == null)||(!(oneLineAll.size() >= 2))) return;
 		
@@ -541,7 +548,14 @@ public class FatherMapActivity extends Activity  implements OnGetRoutePlanResult
 	protected void loadRoute(int id){
 		List<BusLineInfo> oneLineAll = new ArrayList<BusLineInfo>();
 		myapp = (MyApplication) getApplicationContext();
-		oneLineAll = myapp.getBusMap(id);
+		
+		try {
+			oneLineAll = myapp.getBusMap(id);
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		if (oneLineAll == null) return;
 		
 		//构建Marker图标  

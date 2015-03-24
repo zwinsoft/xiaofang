@@ -58,6 +58,7 @@ import com.example.xiaofang.util.SystemUiHider;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
@@ -189,15 +190,7 @@ public class XiaofangActivity extends Activity implements OnGetRoutePlanResultLi
 		
 	}else Toast.makeText(getApplicationContext(), "加载数据source!=route,source="+myapp.getSource(), Toast.LENGTH_SHORT).show();
 	
-	
-	if (MyApplication.source_a.equals("route")){
-		
-		Toast.makeText(getApplicationContext(), "加载数据source_a==route", Toast.LENGTH_SHORT).show();
-		
-	}else{
-		
-		Toast.makeText(getApplicationContext(), "加载数据source_a!=route", Toast.LENGTH_SHORT).show();
-	}
+
 		
 	
 	
@@ -628,7 +621,12 @@ public class XiaofangActivity extends Activity implements OnGetRoutePlanResultLi
     protected void loadRoute(int id){
 		List<BusLineInfo> oneLineAll = new ArrayList<BusLineInfo>();
 		myapp = (MyApplication) getApplicationContext();
-		oneLineAll = myapp.getBusMap(id);
+		try {
+			oneLineAll = myapp.getBusMap(id);
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (oneLineAll == null) return;
 		
 		//构建Marker图标  

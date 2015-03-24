@@ -24,6 +24,7 @@ import com.example.xiaofang.util.LineInfo;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
@@ -72,7 +73,12 @@ public class RouteActivity extends ListActivity{
 				int id = allLines.get(arg2).getId();
 				
 				//从缓存中加载
-				oneLineAll = myapp.getBusMap(id);
+				try {
+					oneLineAll = myapp.getBusMap(id);
+				} catch (DbException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				if (oneLineAll == null) {getLineDetails(id);}
 				else {
 					
@@ -119,7 +125,12 @@ public class RouteActivity extends ListActivity{
 	private void getLineDetails(final int id){
 		
 				//从缓存中加载
-				oneLineAll = myapp.getBusMap(id);
+				try {
+					oneLineAll = myapp.getBusMap(id);
+				} catch (DbException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				if (oneLineAll == null){
 		
@@ -163,14 +174,20 @@ public class RouteActivity extends ListActivity{
 						//缓存数据
 						myapp.addBusMap(id, oneLineAll);
 						
-						if (myapp.getBusMap(id) == null){
+						try {
+							if (myapp.getBusMap(id) == null){
+								
+								Toast.makeText(getApplicationContext(), "没有成功缓存啊   哈哈哈 ", Toast.LENGTH_SHORT).show();
+								
+							}else{
 							
-							Toast.makeText(getApplicationContext(), "没有成功缓存啊   哈哈哈 ", Toast.LENGTH_SHORT).show();
+								String msg = "已将线路缓存，下次加载将不耗费流量......";   
+								Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+							}
 							
-						}else{
-						
-							String msg = "已将线路缓存，下次加载将不耗费流量......";   
-							Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+						} catch (DbException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
 //						
 						//跳转到地图页面显示本线路的相关信息；

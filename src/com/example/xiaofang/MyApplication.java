@@ -12,6 +12,9 @@ import android.util.Log;
 import com.baidu.mapapi.SDKInitializer;
 import com.example.xiaofang.util.BusLineInfo;
 import com.example.xiaofang.util.LineInfo;
+import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.db.sqlite.Selector;
+import com.lidroid.xutils.exception.DbException;
 
 @SuppressLint("UseSparseArrays") 
 public class MyApplication extends Application {
@@ -25,7 +28,8 @@ public class MyApplication extends Application {
 	
 	private String source = null;
 	
-	public static String source_a;
+	DbUtils db = DbUtils.create(this);
+	
 	/*
 	 * 所有线路信息
 	 */
@@ -55,7 +59,6 @@ public class MyApplication extends Application {
 		busMap = new HashMap<Integer,List<BusLineInfo>>();
 		
 		source = "init";
-		source_a = "INIT";
 		
 	}
 	
@@ -63,7 +66,18 @@ public class MyApplication extends Application {
 		
 		//如果非空证明不是第一次加载数据，此时可以直接返回；
 		if (!allLines.isEmpty()) return allLines;
-		//从缓存中加载；暂不写；
+		
+		
+		
+		//从缓存中加载；
+		try {
+			allLines = db.findAll(LineInfo.class);
+			return allLines;
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			Log.v("缓存", "error");
+			e.printStackTrace();
+		}
 		
 		return allLines;
 	}
@@ -71,6 +85,16 @@ public class MyApplication extends Application {
 	public void setAllLines(List<LineInfo> all){
 		
 	allLines = all;
+	//缓存
+	for(LineInfo oneLine:allLines){
+		try {
+			db.save(oneLine);
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			Log.v("缓存添加", "失败");
+			e.printStackTrace();
+		}
+	}
 	
 	}
 	
@@ -81,7 +105,19 @@ public class MyApplication extends Application {
 		Log.d("application", "added one list:"+i);
 		busMap.put(i, list);
 		
-		//加入缓存，待写
+		//缓存
+		for(BusLineInfo oneLineinfo:list){
+			try {
+				db.save(oneLineinfo);
+			} catch (DbException e) {
+				// TODO Auto-generated catch block
+				Log.v("onelineInfo缓存添加", "失败");
+				e.printStackTrace();
+			}
+		}
+		
+		
+	
 	}
 	public void loadBusMap(){		
 		//从缓存中加载，待写
@@ -89,10 +125,13 @@ public class MyApplication extends Application {
 	}
 	
 	
-	public List<BusLineInfo> getBusMap(int i){
+	public List<BusLineInfo> getBusMap(int i) throws DbException{
 	   if (busMap.containsKey(i)){
 		return  busMap.get(i);
-	   } else return null;
+	   } else{
+		   List<BusLineInfo> list = db.findAll(Selector.from(BusLineInfo.class).where("id" ,"=", i));
+		   return list;
+	   } 
 	   
 	}
 	
