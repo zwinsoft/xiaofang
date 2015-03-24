@@ -273,6 +273,7 @@ public class activity_front extends Activity implements BDLocationListener{
 		List<LineInfo> allLines = myapp.getAllLines();
 		
 		//如果已经有缓存，返回
+		if (allLines != null) 
 		if (!allLines.isEmpty()) goIntent();
 		
 		//否则，从网络中加载；

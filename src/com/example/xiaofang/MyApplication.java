@@ -28,7 +28,7 @@ public class MyApplication extends Application {
 	
 	private String source = null;
 	
-	DbUtils db = DbUtils.create(this);
+	DbUtils db;
 	
 	/*
 	 * 所有线路信息
@@ -57,7 +57,7 @@ public class MyApplication extends Application {
 		allLines = new ArrayList<LineInfo>();
 	
 		busMap = new HashMap<Integer,List<BusLineInfo>>();
-		
+		db = DbUtils.create(this);
 		source = "init";
 		
 	}
