@@ -17,7 +17,7 @@ public class RouteMapActivity extends FatherMapActivity {
 		
 		//在使用SDK各组件之前初始化context信息，传入ApplicationContext  
 	    //注意该方法要再setContentView方法之前实现  
-	    SDKInitializer.initialize(getApplicationContext()); 
+//	    SDKInitializer.initialize(getApplicationContext()); /
 	    
 		
 	    setContentView(R.layout.activity_xiaofang);
@@ -40,6 +40,15 @@ public class RouteMapActivity extends FatherMapActivity {
 			//初始化病，设置地图模式改变的监听方法；	
 			initMapModel();
 		int id = this.getIntent().getIntExtra("id",-1);
+		
+		if(id == -2){
+			super.loadMarker(myapp.getNearstInfo());;
+		}
+		if(id == -3){
+			super.loadMarker(myapp.getAllArea(),1);
+		}
+			
+		
 		if (id>=0)
 		{
 			super.loadRoute(id);

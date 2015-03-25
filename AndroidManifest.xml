@@ -125,6 +125,13 @@ ubuntu:unD9KhKGqwlHBXzhLrSsiHPP
             android:label="@string/title_activity_linedails" >
            
          </activity>
+         
+          <activity
+            android:name="com.example.xiaofang.ShiShiActivity"
+            android:label="@string/title_activity_linedails" >
+           
+         </activity>
+         
         <activity
             android:name="com.example.xiaofang.SettingsActivity"
             android:label="@string/title_activity_settings" >

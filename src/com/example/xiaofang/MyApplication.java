@@ -12,6 +12,7 @@ import android.util.Log;
 import com.baidu.mapapi.SDKInitializer;
 import com.example.xiaofang.util.BusLineInfo;
 import com.example.xiaofang.util.LineInfo;
+import com.example.xiaofang.util.RealTimeArea;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.exception.DbException;
@@ -38,7 +39,10 @@ public class MyApplication extends Application {
 //	private List<BusLineInfo> onebusLine = new ArrayList<BusLineInfo>();
 	private Map<Integer,List<BusLineInfo>> busMap;
 	
-	
+	List<RealTimeArea> allArea ;
+
+
+	List<BusLineInfo> nearstInfo;
 	/*SSS
 	 * (non-Javadoc)
 	 * 初始化：
@@ -55,13 +59,31 @@ public class MyApplication extends Application {
 		  SDKInitializer.initialize(getApplicationContext()); 
 		  
 		allLines = new ArrayList<LineInfo>();
-	
+		nearstInfo = new ArrayList<BusLineInfo>();
+		allArea = new ArrayList<RealTimeArea>();
+		
 		busMap = new HashMap<Integer,List<BusLineInfo>>();
 		db = DbUtils.create(this);
 		source = "init";
 		
 	}
 	
+	public List<RealTimeArea> getAllArea() {
+		return allArea;
+	}
+
+	public void setAllArea(List<RealTimeArea> allArea) {
+		this.allArea = allArea;
+	}
+	
+	public List<BusLineInfo> getNearstInfo() {
+		return nearstInfo;
+	}
+
+	public void setNearstInfo(List<BusLineInfo> nearstInfo) {
+		this.nearstInfo = nearstInfo;
+	}
+
 	public List<LineInfo> getAllLines(){
 		
 		//如果非空证明不是第一次加载数据，此时可以直接返回；

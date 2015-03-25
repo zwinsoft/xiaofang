@@ -46,6 +46,7 @@ public class activity_front extends Activity implements BDLocationListener{
 	Boolean toNearstStation = false;
 	Boolean Jumpfenxiang = false;
 	Boolean JumpRoute = false;
+	Boolean JumpShiShi = false;
 
 	
 	// 百度地图定位相关	
@@ -99,7 +100,9 @@ public class activity_front extends Activity implements BDLocationListener{
 			public void onClick(View v) {
 				
 			 //确认下一页加载所有的线路
-				
+				JumpShiShi = true ;
+			
+				loadAllLine();	
 				
 			}
 		});
@@ -257,19 +260,22 @@ public class activity_front extends Activity implements BDLocationListener{
 			//跳转到路线页面
 			myintent = new Intent(activity_front.this, RouteActivity.class);
 			startActivity(myintent);
-			
-			
-			
 			JumpRoute = false;
 			
 		}
 		
+	if(JumpShiShi){
+			
+			JumpShiShi = false;
+			
+			//跳转到路线页面
+			myintent = new Intent(activity_front.this, ShiShiActivity.class);
+			startActivity(myintent);
+		}
 		
 	}
 	
 	private void loadAllLine(){
-		
-		
 		List<LineInfo> allLines = myapp.getAllLines();
 		
 		//如果已经有缓存，返回
@@ -356,27 +362,15 @@ public class activity_front extends Activity implements BDLocationListener{
 					Log.d("getNearstStation--Success", line.id+"Stopname:"+line.getStopName()+"--start:"+line.getTime()+"-----msg\n");
 				}
 				
+				myapp.setNearstInfo(oneLineAll);
 				
-//				//缓存数据
-//				myapp.addBusMap(id, oneLineAll);
-//				
-//				if (myapp.getBusMap(id) == null){
-//					
-//					Toast.makeText(getApplicationContext(), "没有成功缓存啊   哈哈哈 ", Toast.LENGTH_SHORT).show();
-//					
-//				}else{
-//				
-//					String msg = "已将线路缓存，下次加载将不耗费流量......";   
-//					Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-//				}
-//				
-				//跳转到地图页面显示本线路的相关信息；
-				//Intent myintent = new Intent(activity_front.this,RouteMapActivity.class);
-				//type == route 表示是从XiaofangActivity跳过去的 
-				//myintent.putExtra("id", -1);
-				//startActivity(myintent);
+				Intent myintent = new Intent(activity_front.this,RouteMapActivity.class);
 				
-				
+				myintent.putExtra("id", -2);
+				startActivity(myintent);
+				String msg = "已将最近站点缓存";   
+				Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+										
 			}
 
 			@Override

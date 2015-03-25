@@ -22,11 +22,12 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
+import com.baidu.mapapi.map.InfoWindow.OnInfoWindowClickListener;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
@@ -35,15 +36,11 @@ import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
-import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.map.UiSettings;
-import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
-import com.baidu.mapapi.map.InfoWindow.OnInfoWindowClickListener;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.overlayutil.WalkingRouteOverlay;
 import com.baidu.mapapi.search.core.SearchResult;
-import com.baidu.mapapi.search.route.DrivingRoutePlanOption;
 import com.baidu.mapapi.search.route.DrivingRouteResult;
 import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
 import com.baidu.mapapi.search.route.PlanNode;
@@ -52,10 +49,10 @@ import com.baidu.mapapi.search.route.TransitRouteResult;
 import com.baidu.mapapi.search.route.WalkingRouteLine;
 import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
-import com.example.xiaofang.R;
 import com.example.xiaofang.util.BusGet;
 import com.example.xiaofang.util.BusLineInfo;
 import com.example.xiaofang.util.LineInfo;
+import com.example.xiaofang.util.RealTimeArea;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
@@ -466,7 +463,7 @@ public class FatherMapActivity extends Activity  implements OnGetRoutePlanResult
 	/*
 	 * 标注附近的公交站点
 	 */
-	protected void loadMarker(){
+	protected void loadMarker(List<BusLineInfo>	buses){
 		
 		//构建Marker图标  
 		BitmapDescriptor bitmap = BitmapDescriptorFactory  
@@ -477,7 +474,35 @@ public class FatherMapActivity extends Activity  implements OnGetRoutePlanResult
 					overlayOption = new MarkerOptions().position(new LatLng(bus.getLat(),bus.getLng())).icon(bitmap).zIndex(1).draggable(true);
 					mBaiduMap.addOverlay(overlayOption);
 					
-					if (buses.getLast() == bus){
+					if (buses.get(buses.size()-1) == bus){
+						
+//						 定义地图状况
+				        MapStatus mMapStatus = new MapStatus.Builder().target(new LatLng(bus.getLat(),bus.getLng())).build();
+				        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+						//MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(ll, mBaiduMap.getMaxZoomLevel());
+						//改变地图状态        				
+						mBaiduMap.setMapStatus(mMapStatusUpdate);
+						mBaiduMap.animateMapStatus(mMapStatusUpdate);
+						mMapView.invalidate();
+						
+						Toast.makeText(getApplicationContext(), "附近的公交站点，标注完毕", Toast.LENGTH_SHORT).show();
+					}
+			}
+		
+	}
+	
+	protected void loadMarker(List<RealTimeArea> realAreas,int a){
+		
+		//构建Marker图标  
+		BitmapDescriptor bitmap = BitmapDescriptorFactory  
+		    .fromResource(R.drawable.icon_gcoding);  
+		if (realAreas == null) return;
+		OverlayOptions overlayOption;
+		for (RealTimeArea bus:realAreas){
+					overlayOption = new MarkerOptions().position(new LatLng(bus.getLat(),bus.getLng())).icon(bitmap).zIndex(1).draggable(true);
+					mBaiduMap.addOverlay(overlayOption);
+					
+					if (realAreas.get(realAreas.size()-1) == bus){
 						
 //						 定义地图状况
 				        MapStatus mMapStatus = new MapStatus.Builder().target(new LatLng(bus.getLat(),bus.getLng())).build();
@@ -584,12 +609,6 @@ public class FatherMapActivity extends Activity  implements OnGetRoutePlanResult
 				}
 					
 			}
-		
-
-		
-		
-		
-		
 	}
 	
 	/**
