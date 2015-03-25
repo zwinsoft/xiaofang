@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -64,6 +65,7 @@ public class activity_front extends Activity implements BDLocationListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
 		setContentView(R.layout.front);
 		
@@ -213,23 +215,12 @@ public class activity_front extends Activity implements BDLocationListener{
 		}else if (toNearstStation){
 			//保证缓存中含有最近站点
 			toNearstStation=false;
-			loadNearstStation(loc.getLongitude(),loc.getLatitude());///待实现！！！！！！！！！！！！！！！！！！！！！！！!!!
-			
-			//跳转到最近站点页面
-//			myintent = new Intent(activity_front.this, NearstStationActivity.class);
-//			
-//			myintent.putExtra("lng", loc.getLongitude());
-//			myintent.putExtra("lat", loc.getLatitude());
-//			
-//			startActivity(myintent);
-			
-			
+			loadNearstStation(loc.getLongitude(),loc.getLatitude());
 		}
 		
 		//定位信息只用一次，就可以关闭了；
 		mLocClient.stop();
 	}
-
 
 	@Override
 	public void onReceivePoi(BDLocation arg0) {

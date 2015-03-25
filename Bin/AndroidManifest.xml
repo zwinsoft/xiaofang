@@ -32,8 +32,10 @@
         android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="aZGxFmqAMxDYzCM8XHgVK8c7" />
+            android:value="nYoDTXCAcwEZStAiYXFnCuZH" />
 <!-- com.example.xiaofang 
+mac1.0  :
+77:CE:38:24:26:65:19:1C:4B:E8:4A:2D:D4:4B:F9:0F:1B:C5:10:19;com.example.xiaofang
 
 
 mac:aZGxFmqAMxDYzCM8XHgVK8c7
@@ -99,14 +101,16 @@ ubuntu:unD9KhKGqwlHBXzhLrSsiHPP
         </activity>
           <activity
             android:name="com.example.xiaofang.NearstStationActivity"
-            android:label="@string/title_activity_linedails" >
+            android:label="@string/title_activity_nearststation" >
         </activity>
         
           
            <activity
             android:name="com.example.xiaofang.activity_front"
-            android:label="@string/title_activity_linedails" >
+            android:label="@string/title_activity_front"
+            android:hardwareAccelerated="false" >
             
+               
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -122,13 +126,13 @@ ubuntu:unD9KhKGqwlHBXzhLrSsiHPP
         
          <activity
             android:name="com.example.xiaofang.RouteMapActivity"
-            android:label="@string/title_activity_linedails" >
+            android:label="@string/title_activity_routemap" >
            
          </activity>
          
           <activity
             android:name="com.example.xiaofang.ShiShiActivity"
-            android:label="@string/title_activity_linedails" >
+            android:label="@string/title_activity_shishi" >
            
          </activity>
          

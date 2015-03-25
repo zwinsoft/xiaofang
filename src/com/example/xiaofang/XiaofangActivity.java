@@ -15,6 +15,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -134,6 +135,7 @@ public class XiaofangActivity extends Activity implements OnGetRoutePlanResultLi
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 	//在使用SDK各组件之前初始化context信息，传入ApplicationContext  
     //注意该方法要再setContentView方法之前实现  
     SDKInitializer.initialize(getApplicationContext()); 

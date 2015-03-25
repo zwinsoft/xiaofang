@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -48,7 +49,7 @@ public class RouteActivity extends ListActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		/*setContentView(R.layout.activity_route);*/
 		
 		
@@ -64,6 +65,9 @@ public class RouteActivity extends ListActivity{
 		
 		setListAdapter(adapter);
 		listview = getListView();  
+		
+		listview.setDividerHeight(1);
+		//listview.setDivider("#FFF");
 		
 		listview.setOnItemClickListener(new OnItemClickListener(){
 

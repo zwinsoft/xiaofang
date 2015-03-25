@@ -59,12 +59,23 @@ public class MyApplication extends Application {
 		  SDKInitializer.initialize(getApplicationContext()); 
 		  
 		allLines = new ArrayList<LineInfo>();
+	
+		
+		
 		nearstInfo = new ArrayList<BusLineInfo>();
 		allArea = new ArrayList<RealTimeArea>();
 		
 		busMap = new HashMap<Integer,List<BusLineInfo>>();
 		db = DbUtils.create(this);
 		source = "init";
+		//从缓存中加载；
+		try {
+			allLines = db.findAll(LineInfo.class);
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			Log.v("缓存", "error");
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -87,10 +98,8 @@ public class MyApplication extends Application {
 	public List<LineInfo> getAllLines(){
 		
 		//如果非空证明不是第一次加载数据，此时可以直接返回；
-		if (!allLines.isEmpty()) return allLines;
-		
-		
-		
+		if (allLines != null)
+		if (!allLines.isEmpty()) return allLines;	
 		//从缓存中加载；
 		try {
 			allLines = db.findAll(LineInfo.class);

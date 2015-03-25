@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -48,7 +49,7 @@ public class ShiShiActivity extends ListActivity{
 		super.onCreate(savedInstanceState);
 		
 		/*setContentView(R.layout.activity_route);*/
-		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
 		myapp = (MyApplication) getApplicationContext();
 		//从缓存中加载数据

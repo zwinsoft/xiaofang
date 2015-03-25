@@ -135,7 +135,7 @@
     </FrameLayout>
 
 	
- <FrameLayout
+<!--  <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="40dip"
          android:layout_gravity="bottom|center_horizontal"
@@ -193,6 +193,6 @@
              android:text="@string/setting" />
      </LinearLayout>
        
-    </FrameLayout>
+    </FrameLayout> -->
 
 </FrameLayout>
