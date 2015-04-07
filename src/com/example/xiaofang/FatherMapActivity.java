@@ -471,7 +471,11 @@ public class FatherMapActivity extends Activity  implements OnGetRoutePlanResult
 		
 		OverlayOptions overlayOption;
 		for (BusLineInfo bus:buses){
-					overlayOption = new MarkerOptions().position(new LatLng(bus.getLat(),bus.getLng())).icon(bitmap).zIndex(1).draggable(true);
+					overlayOption = new MarkerOptions()
+						.position(new LatLng(bus.getLat(),bus.getLng()))
+						.icon(bitmap)
+						.zIndex(1)
+						.draggable(true);
 					mBaiduMap.addOverlay(overlayOption);
 					
 					if (buses.get(buses.size()-1) == bus){
@@ -480,7 +484,8 @@ public class FatherMapActivity extends Activity  implements OnGetRoutePlanResult
 				        MapStatus mMapStatus = new MapStatus.Builder().target(new LatLng(bus.getLat(),bus.getLng())).build();
 				        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
 						//MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(ll, mBaiduMap.getMaxZoomLevel());
-						//改变地图状态        				
+						//改变地图状态        		
+				        
 						mBaiduMap.setMapStatus(mMapStatusUpdate);
 						mBaiduMap.animateMapStatus(mMapStatusUpdate);
 						mMapView.invalidate();

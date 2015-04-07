@@ -327,7 +327,7 @@ public class activity_front extends Activity implements BDLocationListener{
 				Log.d("lineDetails", responseInfo.result);
 				
 				//如果返回 “null”  没有内容返回；
-				if (responseInfo.result.equals("resultIsNull")){
+				if ((responseInfo.result =="resultIsNull")||(responseInfo.result.endsWith("resultIsNull"))){
 					String msg = "no this line's details";   
 					Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 					return;
